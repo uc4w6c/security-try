@@ -1,0 +1,9 @@
+# common
+.metadata
+.DS_Store
+
+# demo
+demo/bin
+demo/build
+demo/.idea
+demo/.gradle
