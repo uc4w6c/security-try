@@ -1,17 +1,17 @@
 package com.example.demo.domain;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.seasar.doma.Entity;
+
 /**
  * TODO: 実装すること
  */
+@Entity
+@Getter
+@RequiredArgsConstructor
 public class Account {
-
-    public String getPassword() {
-        return "aa";
-    }
-    public String getUsername() {
-        return "aa";
-    }
-    public boolean isEnabled() {
-        return true;
-    }
+    private final String username;
+    private final String password;
+    private final boolean enabled;
 }
