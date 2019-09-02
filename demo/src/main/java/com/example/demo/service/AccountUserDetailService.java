@@ -21,7 +21,7 @@ public class AccountUserDetailService implements UserDetailsService {
     @Override
     // @Transactional(readOnly = true) なぜかエラーになる
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = Optional.ofNullable(accountRepository.findOne(username))
+        Account account = Optional.ofNullable(accountRepository.findByUsername(username))
                     .orElseThrow(() -> new UsernameNotFoundException("user not found"));
         return new AccountUserDetails(account, AuthorityUtils.createAuthorityList(("ROLE_USER")));
     }
