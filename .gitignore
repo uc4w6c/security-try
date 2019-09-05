@@ -7,3 +7,6 @@ demo/bin
 demo/build
 demo/.idea
 demo/.gradle
+demo/demo.iml
+demo/demo.ipr
+demo/demo.iws
