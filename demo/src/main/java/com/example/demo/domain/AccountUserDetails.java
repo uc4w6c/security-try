@@ -22,7 +22,8 @@ public class AccountUserDetails implements UserDetails {
         return account.getUsername();
     }
     public boolean isEnabled() {
-        return account.isEnabled();
+        return true;
+        // return account.isEnabled();
     }
 
     public Collection<GrantedAuthority> getAuthorities() {

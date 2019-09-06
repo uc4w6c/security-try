@@ -3,7 +3,6 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 }
-apply plugin: 'idea'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -11,9 +10,11 @@ sourceCompatibility = '11'
 targetCompatibility = '11'
 
 // これ一回いれて見る
+apply plugin: 'idea'
+
 idea {
 	module {
-		inheritOutputDirs = true
+		inheritOutputDirs = false // trueじゃないとだめなパターンもあるらしい
 		outputDir = file("build/classes/java/main/")
 		// outputDir = compileJava.destinationDir
 		// testOutputDir file('build/classes/test')
@@ -51,6 +52,8 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	compile('org.seasar.doma.boot:doma-spring-boot-starter:1.1.1')
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "org.seasar.doma:doma:2.25.0"
+	implementation "org.seasar.doma:doma:2.25.0"
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}

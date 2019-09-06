@@ -13,7 +13,7 @@ public class AccoutUserDetails extends User {
                     boolean credentialsNonExpired, boolean accountNonLocked,
                     Collection<GrantedAuthority> authorities) {
         super(account.getUsername(), account.getPassword(),
-                account.isEnabled(), true, true, true, authorities);
+                /* account.isEnabled() */ true, true, true, true, authorities);
         this.account = account;
     }
 
