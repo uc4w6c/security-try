@@ -9,6 +9,29 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 targetCompatibility = '11'
 
+task copyDomaResources(type: Sync)  {
+	from sourceSets.main.resources.srcDirs
+	into compileJava.destinationDir
+	include 'doma.compile.config'
+	include 'META-INF/**/*.sql'
+	include 'META-INF/**/*.script'
+}
+
+compileJava {
+	// Depend on the above task
+	dependsOn copyDomaResources
+	options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+	options.encoding = 'UTF-8'
+	// Disable the annotation processors during the test run
+	options.compilerArgs = ['-proc:none']
+}
+
+// processResources.destinationDir = compileJava.destinationDir
+// compileJava.dependsOn processResources
+
 // これ一回いれて見る
 apply plugin: 'idea'
 
@@ -30,9 +53,6 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
-
-processResources.destinationDir = compileJava.destinationDir
-compileJava.dependsOn processResources
 
 repositories {
 	mavenCentral()

@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +13,9 @@ import org.seasar.doma.jdbc.entity.NamingType;
  * TODO: 実装すること
  */
 @Getter
-@RequiredArgsConstructor
-@Entity(naming = NamingType.SNAKE_UPPER_CASE, immutable = true)
+// @RequiredArgsConstructor
+@AllArgsConstructor
+@Entity(immutable = true)
 @Table(name = "accounts")
 public class Account {
     @Id
