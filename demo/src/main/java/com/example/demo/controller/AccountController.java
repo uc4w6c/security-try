@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.form.UserCreateForm;
-import com.example.demo.service.UserService;
+import com.example.demo.service.AccountService;
+import com.example.demo.service.AccountUserDetailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AccountController {
 
-    private final UserService userService;
+    private final AccountService accountService;
 
-    public AccountController(UserService userService) {
-        this.userService = userService;
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping
@@ -37,7 +38,7 @@ public class AccountController {
             return "redirect:/account";
         }
         // model.addAttribute("user", userService.create(form));
-        userService.create(form);
+        accountService.create(form);
         return "top";
     }
 }
