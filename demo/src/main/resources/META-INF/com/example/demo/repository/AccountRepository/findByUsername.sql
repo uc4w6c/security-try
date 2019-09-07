@@ -1,6 +1,8 @@
 select
     username
-  , password
+    , password
+    , birthday
+    , enabled
 from
     accounts
 where

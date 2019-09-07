@@ -67,6 +67,7 @@ dependencies {
 	compile('org.webjars:jquery:3.2.1')
 	compile('org.webjars:jquery-ui:1.12.1')
 	compile('org.webjars:bootstrap:4.0.0')
+	compile('org.springframework.boot:spring-boot-starter-aop')
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'

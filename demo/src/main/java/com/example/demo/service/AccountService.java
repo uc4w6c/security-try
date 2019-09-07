@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Account;
 import com.example.demo.form.UserCreateForm;
+import com.example.demo.form.UserPasswordChangeForm;
 import com.example.demo.repository.AccountRepository;
 import org.seasar.doma.jdbc.Result;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,11 +18,28 @@ public class AccountService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * アカウント作成メソッド
+     * TODO: formに依存しちゃってるから改善したい
+     * @param form
+     * @return
+     */
     public Account create(UserCreateForm form) {
-        String hashPassword = passwordEncoder.encode(form.getPassword());
-        Account account = new Account(form.getUsername(), hashPassword);
+        String encryptPassword = passwordEncoder.encode(form.getPassword());
+        Account account = new Account(form.getUsername(), encryptPassword, form.getBirthday(), false);
         Result<Account> result = accountRepository.save(account);
         return result.getEntity();
+    }
+
+    /**
+     * パスワード変更メソッド
+     * @param username
+     * @param plainPassword
+     * @return void
+     */
+    public void passwordChange(String username, String plainPassword) {
+        String encryptPassword = passwordEncoder.encode(plainPassword);
+        accountRepository.passwordChange(username, encryptPassword);
     }
 
     public Account find(String username) {

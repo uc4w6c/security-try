@@ -9,6 +9,8 @@ import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.jdbc.entity.NamingType;
 
+import java.util.Date;
+
 @Getter
 // @RequiredArgsConstructor
 @AllArgsConstructor
@@ -18,5 +20,6 @@ public class Account {
     @Id
     private final String username;
     private final String password;
-    // private final boolean enabled;
+    private final Date birthday;
+    private final boolean enabled;
 }

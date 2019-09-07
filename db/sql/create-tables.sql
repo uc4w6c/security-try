@@ -1,8 +1,10 @@
 ---- create ----
 create table testdb.accounts
 (
- username        VARCHAR(50) NOT NULL
- , password        VARCHAR(250) NOT NULL
- ,   PRIMARY KEY (username)
+ username        varchar(50) not null
+ , password        varchar(250) not null
+ , birthday        date not null
+ , enabled         boolean not null default 0
+ ,   primary key (username)
 );
 
