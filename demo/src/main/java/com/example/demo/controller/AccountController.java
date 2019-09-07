@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@RequestMapping("/account")
+@RequestMapping("/")
 @Controller
 public class AccountController {
 
@@ -24,19 +24,19 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping
+    @GetMapping("signup")
     public String create() {
         return "account/create";
     }
 
-    @PostMapping()
+    @PostMapping("signup")
     public String create(@ModelAttribute("form") @Validated UserCreateForm form,
                          BindingResult result,
                          RedirectAttributes redirectAttributes,
                          Model model) {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("form", form);
-            return "redirect:/account";
+            return "redirect:/signup";
         }
         // model.addAttribute("user", userService.create(form));
         accountService.create(form);
@@ -45,6 +45,7 @@ public class AccountController {
 
     /**
      * なぜか動かない。。。_method patchが動作していないっぽい。Springのバグか？
+     * NOTE: patchが動かないからPOST
      * @param form
      * @param accountUserDetails
      * @param result
@@ -52,7 +53,7 @@ public class AccountController {
      * @param model
      * @return
      */
-    @PatchMapping()
+    @PostMapping("account/edit")
     public String passwordChange(@ModelAttribute("form") @Validated UserPasswordChangeForm form,
                                  @AuthenticationPrincipal AccountUserDetails accountUserDetails,
                          BindingResult result,
@@ -67,7 +68,7 @@ public class AccountController {
         return "redirect:/top";
     }
 
-    @GetMapping("detail")
+    @GetMapping("account/detail")
     public String detail(@AuthenticationPrincipal AccountUserDetails accountUserDetails, Model model) {
         Account account = accountService.find(accountUserDetails.getUsername());
         model.addAttribute("account", account);
