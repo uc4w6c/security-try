@@ -26,23 +26,23 @@ public class AccountService {
      */
     public Account create(UserCreateForm form) {
         String encryptPassword = passwordEncoder.encode(form.getPassword());
-        Account account = new Account(form.getUsername(), encryptPassword, form.getBirthday(), false);
+        Account account = new Account(form.getEmail(), encryptPassword, form.getBirthday(), false);
         Result<Account> result = accountRepository.save(account);
         return result.getEntity();
     }
 
     /**
      * パスワード変更メソッド
-     * @param username
+     * @param email
      * @param plainPassword
      * @return void
      */
-    public void passwordChange(String username, String plainPassword) {
+    public void passwordChange(String email, String plainPassword) {
         String encryptPassword = passwordEncoder.encode(plainPassword);
-        accountRepository.passwordChange(username, encryptPassword);
+        accountRepository.passwordChange(email, encryptPassword);
     }
 
-    public Account find(String username) {
-        return accountRepository.findByUsername(username);
+    public Account find(String email) {
+        return accountRepository.findByEmail(email);
     }
 }

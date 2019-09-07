@@ -3,4 +3,4 @@ update
 set
     password = /* encryptPassword */'password'
 where
-    username = /* username */'taro'
+    email = /* email */'taro'

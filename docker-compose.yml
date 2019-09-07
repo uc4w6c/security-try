@@ -19,4 +19,22 @@ services:
     - ./db/sql:/docker-entrypoint-initdb.d
     ports:
     - 3307:3306
-
+  # postfixadmin
+  postfix:
+    image: catatnight/postfix:latest
+    ports:
+    - 25:25
+    - 587:587
+    environtment:
+      TZ: Asia/Tokyo
+      maildomain: demo.example.com
+      smtp_user: 'test:test'
+    volumes:
+    - ./mail/logs:/var/log/postfix
+    restart: always
+  # maildev
+  maildev:
+    image: djfarrelly/maildev:latest
+    ports:
+    - 1080:80
+    - 3025:25

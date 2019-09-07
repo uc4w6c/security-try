@@ -63,6 +63,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.webjars:jquery:3.2.1')
 	compile('org.webjars:jquery-ui:1.12.1')

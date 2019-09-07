@@ -18,7 +18,7 @@ import java.util.Date;
 @Table(name = "accounts")
 public class Account {
     @Id
-    private final String username;
+    private final String email;
     private final String password;
     private final Date birthday;
     private final boolean enabled;

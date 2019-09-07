@@ -12,11 +12,11 @@ import org.seasar.doma.jdbc.Result;
 @Dao
 public interface AccountRepository {
     @Select
-    public Account findByUsername(String username);
+    public Account findByEmail(String email);
 
     @Insert
     public Result<Account> save(Account account);
 
     @Update(sqlFile = true)
-    public int passwordChange(String username, String encryptPassword);
+    public int passwordChange(String email, String encryptPassword);
 }

@@ -1,9 +1,9 @@
 select
-    username
+    email
     , password
     , birthday
     , enabled
 from
     accounts
 where
-    username = /* username */'taro'
+    email = /* email */'taro'

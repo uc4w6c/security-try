@@ -19,7 +19,7 @@ public class AccountUserDetails implements UserDetails {
         return account.getPassword();
     }
     public String getUsername() {
-        return account.getUsername();
+        return account.getEmail();
     }
     public boolean isEnabled() {
         return true;

@@ -10,3 +10,6 @@ demo/.gradle
 demo/demo.iml
 demo/demo.ipr
 demo/demo.iws
+
+# postfix
+mail/log
