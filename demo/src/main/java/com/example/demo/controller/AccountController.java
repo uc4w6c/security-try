@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Account;
+import com.example.demo.domain.AccountUserDetails;
 import com.example.demo.form.UserCreateForm;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.AccountUserDetailService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,5 +43,12 @@ public class AccountController {
         // model.addAttribute("user", userService.create(form));
         accountService.create(form);
         return "top";
+    }
+
+    @GetMapping("detail")
+    public String detail(@AuthenticationPrincipal AccountUserDetails accountUserDetails, Model model) {
+        Account account = accountService.find(accountUserDetails.getUsername());
+        model.addAttribute("account", account);
+        return "account/detail";
     }
 }

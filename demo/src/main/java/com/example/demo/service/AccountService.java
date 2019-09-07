@@ -23,4 +23,8 @@ public class AccountService {
         Result<Account> result = accountRepository.save(account);
         return result.getEntity();
     }
+
+    public Account find(String username) {
+        return accountRepository.findByUsername(username);
+    }
 }
