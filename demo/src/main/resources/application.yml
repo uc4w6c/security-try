@@ -15,3 +15,14 @@ security:
 doma:
   dialect: mysql
   sql-file-repository: no_cache
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          EnumType: trace
+          descriptor:
+            sql:
+              BasicBinder: trace

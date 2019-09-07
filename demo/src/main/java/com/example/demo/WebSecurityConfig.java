@@ -35,7 +35,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/**").permitAll() // 一旦全て認証不要に設定
-            .anyRequest().authenticated();
+                .antMatchers("/").permitAll()
+                .antMatchers("/login/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .failureUrl("/login")
+                .defaultSuccessUrl("/top")
+                .permitAll();
     }
 }

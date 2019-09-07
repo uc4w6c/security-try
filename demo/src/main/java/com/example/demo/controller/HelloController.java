@@ -10,4 +10,8 @@ public class HelloController {
     public String index() {
         return "index";
     }
+    @RequestMapping("/top")
+    public String top() {
+        return "top";
+    }
 }
