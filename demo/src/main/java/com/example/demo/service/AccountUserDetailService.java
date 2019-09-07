@@ -27,5 +27,4 @@ public class AccountUserDetailService implements UserDetailsService {
                     .orElseThrow(() -> new UsernameNotFoundException("user not found"));
         return new AccountUserDetails(account, AuthorityUtils.createAuthorityList(("ROLE_USER")));
     }
-
 }

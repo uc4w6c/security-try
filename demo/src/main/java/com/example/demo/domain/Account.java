@@ -9,9 +9,6 @@ import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.jdbc.entity.NamingType;
 
-/**
- * TODO: 実装すること
- */
 @Getter
 // @RequiredArgsConstructor
 @AllArgsConstructor
