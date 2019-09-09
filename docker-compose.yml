@@ -28,10 +28,18 @@ services:
     - 587:587
     environment:
       TZ: 'Asia/Tokyo'
-      maildomain: 'demo.example.com'
+      # maildomain: 'demo.example.com'
+      maildomain: 'localhost'
+      # mydomain: localhost
       smtp_user: 'test:test'
+      # このあたり反映されてないかも
+      relayhost: '127.0.0.1:1025'
+      luser_relay: maildev
+    command: postmap /etc/postfix/transport
     volumes:
     - ./mail/logs:/var/log/postfix
+    - ./mail/main.cf:/etc/postfix/main.cf
+    - ./mail/transport:/etc/postfix/transport
     restart: always
 
   # maildev
