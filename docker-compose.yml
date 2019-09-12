@@ -35,9 +35,10 @@ services:
       # このあたり反映されてないかも
       relayhost: '127.0.0.1:1025'
       luser_relay: maildev
-    command: postmap /etc/postfix/transport
+    # command: sudo postmap /etc/postfix/transport
+    # commandではなくDockerfileを作成して実行しないといけない
     volumes:
-    - ./mail/logs:/var/log/postfix
+    # - ./mail/logs/mail.log:/var/log/mail.log
     - ./mail/main.cf:/etc/postfix/main.cf
     - ./mail/transport:/etc/postfix/transport
     restart: always
