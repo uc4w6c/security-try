@@ -22,7 +22,7 @@ services:
 
   # postfixadmin
   postfix:
-    image: catatnight/postfix:latest
+    build: ./mail
     ports:
     - 25:25
     - 587:587
@@ -37,10 +37,10 @@ services:
       luser_relay: maildev
     # command: sudo postmap /etc/postfix/transport
     # commandではなくDockerfileを作成して実行しないといけない
-    volumes:
+    # volumes:
     # - ./mail/logs/mail.log:/var/log/mail.log
-    - ./mail/main.cf:/etc/postfix/main.cf
-    - ./mail/transport:/etc/postfix/transport
+    # - ./mail/main.cf:/etc/postfix/main.cf
+    # - ./mail/transport:/etc/postfix/transport
     restart: always
 
   # maildev
