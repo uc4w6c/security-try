@@ -1,6 +1,6 @@
 select
     email
-    , password
+    , password_digest
     , birthday
     , enabled
 from

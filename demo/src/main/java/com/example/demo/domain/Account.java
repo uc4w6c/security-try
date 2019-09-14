@@ -14,12 +14,13 @@ import java.util.Date;
 @Getter
 // @RequiredArgsConstructor
 @AllArgsConstructor
-@Entity(immutable = true)
+@Entity(immutable = true, naming = NamingType.SNAKE_UPPER_CASE)
 @Table(name = "accounts")
 public class Account {
     @Id
     private final String email;
-    private final String password;
+    private final String passwordDigest;
     private final Date birthday;
+    private final String activationDigest;
     private final boolean enabled;
 }

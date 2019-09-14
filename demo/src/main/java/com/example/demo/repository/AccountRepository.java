@@ -18,5 +18,5 @@ public interface AccountRepository {
     public Result<Account> save(Account account);
 
     @Update(sqlFile = true)
-    public int passwordChange(String email, String encryptPassword);
+    public int passwordChange(String email, String passwordDigest);
 }

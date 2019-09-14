@@ -16,14 +16,14 @@ public class AccountUserDetails implements UserDetails {
     }
 
     public String getPassword() {
-        return account.getPassword();
+        return account.getPasswordDigest();
     }
     public String getUsername() {
         return account.getEmail();
     }
     public boolean isEnabled() {
-        return true;
-        // return account.isEnabled();
+        // return true;
+        return account.isEnabled();
     }
 
     public Collection<GrantedAuthority> getAuthorities() {

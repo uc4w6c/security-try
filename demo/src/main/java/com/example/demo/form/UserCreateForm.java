@@ -20,6 +20,9 @@ public class UserCreateForm {
     @NotEmpty
     @Size(min = 5, max = 50, message = "パスワードは5~50文字で設定してください")
     private String password;
+    @NotEmpty
+    @Size(min = 5, max = 50, message = "パスワードは5~50文字で設定してください")
+    private String passwordConfirmation;
     @NotNull(message = "{dateFrom.notnull}")
     @DateTimeFormat(pattern="yyyy/MM/dd")
     private Date birthday;

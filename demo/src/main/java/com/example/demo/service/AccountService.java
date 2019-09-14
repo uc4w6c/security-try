@@ -25,8 +25,8 @@ public class AccountService {
      * @return
      */
     public Account create(UserCreateForm form) {
-        String encryptPassword = passwordEncoder.encode(form.getPassword());
-        Account account = new Account(form.getEmail(), encryptPassword, form.getBirthday(), false);
+        String passwordDigest = passwordEncoder.encode(form.getPassword());
+        Account account = new Account(form.getEmail(), passwordDigest, form.getBirthday(), null, false);
         Result<Account> result = accountRepository.save(account);
         return result.getEntity();
     }
@@ -38,8 +38,8 @@ public class AccountService {
      * @return void
      */
     public void passwordChange(String email, String plainPassword) {
-        String encryptPassword = passwordEncoder.encode(plainPassword);
-        accountRepository.passwordChange(email, encryptPassword);
+        String passwordDigest = passwordEncoder.encode(plainPassword);
+        accountRepository.passwordChange(email, passwordDigest);
     }
 
     public Account find(String email) {

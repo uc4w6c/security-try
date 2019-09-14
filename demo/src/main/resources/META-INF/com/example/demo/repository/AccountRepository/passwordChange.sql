@@ -1,6 +1,6 @@
 update
     accounts
 set
-    password = /* encryptPassword */'password'
+    password_digest = /* passwordDigest */'password'
 where
     email = /* email */'taro'
