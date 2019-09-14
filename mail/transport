@@ -1,1 +1,2 @@
-*       local
+# maildev(dockerで作成したサーバ)を指定して転送
+*       smtp:maildev
