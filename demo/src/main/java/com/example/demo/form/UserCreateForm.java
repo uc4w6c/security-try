@@ -1,5 +1,6 @@
 package com.example.demo.form;
 
+import com.example.demo.validation.annotation.EqualsPropertyValues;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @Getter
 @AllArgsConstructor
+@EqualsPropertyValues(property = "password", comparingProperty = "passwordConfirmation")
 public class UserCreateForm {
     @NotEmpty
     @Size(min = 1, max = 50)
