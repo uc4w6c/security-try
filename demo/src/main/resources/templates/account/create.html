@@ -25,13 +25,11 @@
         <div class="col-md-6 col-lg-6">
             <div class="well well-sm">
                 <form id="create_form" method="post" th:action="@{/signup}" th:object="${userCreateForm}">
-                    <!--
                     <div id="messages">
                         <li th:each="error: ${#fields.allErrors()}">
                             [[${error}]]
                         </li>
                     </div>
-                    -->
                     <fieldset id="login_field">
                         <div class="form-group">
                             <label>メールアドレス</label>

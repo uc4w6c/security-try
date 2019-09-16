@@ -42,7 +42,6 @@ public class AccountController {
                              BindingResult result/*,
                              RedirectAttributes redirectAttributes,
                              Model model*/) {
-            // th:action="@{/signup}"
         if (result.hasErrors()) {
             // redirectAttributes.addFlashAttribute("form", form);
             // return "redirect:/signup";
