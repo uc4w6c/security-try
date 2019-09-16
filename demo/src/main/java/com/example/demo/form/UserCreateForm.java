@@ -4,6 +4,7 @@ import com.example.demo.validation.annotation.EqualsPropertyValues;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
@@ -15,6 +16,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString //(exclude="password, passwordConfirmation")
 @EqualsPropertyValues(property = "password", comparingProperty = "passwordConfirmation")
 public class UserCreateForm {
     @NotEmpty

@@ -24,27 +24,36 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    /*
+    @ModelAttribute
+    public UserCreateForm setupForm() {
+        return new UserCreateForm();
+    }
+    */
+
     @GetMapping("signup")
-    public String create(UserCreateForm form) {
-        // model.addAttribute(new UserCreateForm());
+    public String create(@ModelAttribute("userCreateForm") UserCreateForm userCreateForm /*, Model model*/) {
+        // model.addAttribute("userCreateForm", new UserCreateForm());
         return "account/create";
     }
 
     @PostMapping("signup")
-    public String create(@ModelAttribute @Validated UserCreateForm form,
-                         BindingResult result,
-                         RedirectAttributes redirectAttributes,
-                         Model model) {
+        public String create(@ModelAttribute("userCreateForm") @Validated UserCreateForm userCreateForm,
+                             BindingResult result/*,
+                             RedirectAttributes redirectAttributes,
+                             Model model*/) {
+            // th:action="@{/signup}"
         if (result.hasErrors()) {
             // redirectAttributes.addFlashAttribute("form", form);
             // return "redirect:/signup";
 
-            model.addAttribute("userCreateForm", form);
-            return "account/create";
+            // model.addAttribute("userCreateForm", form);
+            // return "account/create";
+            return create(userCreateForm);
         }
         // model.addAttribute("user", userService.create(form));
-        accountService.create(form);
-        return "top";
+        accountService.create(userCreateForm);
+        return "redirect:/top";
     }
 
     /**
