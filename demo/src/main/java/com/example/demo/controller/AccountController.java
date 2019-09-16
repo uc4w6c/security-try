@@ -25,18 +25,22 @@ public class AccountController {
     }
 
     @GetMapping("signup")
-    public String create() {
+    public String create(UserCreateForm form) {
+        // model.addAttribute(new UserCreateForm());
         return "account/create";
     }
 
     @PostMapping("signup")
-    public String create(@ModelAttribute("form") @Validated UserCreateForm form,
+    public String create(@ModelAttribute @Validated UserCreateForm form,
                          BindingResult result,
                          RedirectAttributes redirectAttributes,
                          Model model) {
         if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("form", form);
-            return "redirect:/signup";
+            // redirectAttributes.addFlashAttribute("form", form);
+            // return "redirect:/signup";
+
+            model.addAttribute("userCreateForm", form);
+            return "account/create";
         }
         // model.addAttribute("user", userService.create(form));
         accountService.create(form);
