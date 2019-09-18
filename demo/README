@@ -21,3 +21,7 @@ DOMA設定
 　https://doma.readthedocs.io/en/stable/build/
   ・エンティティ設定
   https://doma.readthedocs.io/en/2.6.2/entity/
+
+SpringSecurity
+・各種参考になるもの
+https://terasolunaorg.github.io/guideline/5.1.0.RELEASE/ja/Security/SecureLoginDemo.html#reissue-info-delivery

@@ -5,8 +5,11 @@ import com.example.demo.form.UserCreateForm;
 import com.example.demo.form.UserPasswordChangeForm;
 import com.example.demo.repository.AccountRepository;
 import org.seasar.doma.jdbc.Result;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class AccountService {
@@ -26,8 +29,24 @@ public class AccountService {
      */
     public Account create(UserCreateForm form) {
         String passwordDigest = passwordEncoder.encode(form.getPassword());
-        Account account = new Account(form.getEmail(), passwordDigest, form.getBirthday(), null, false);
+        String activationDigest = UUID.randomUUID().toString();
+        Account account = new Account(form.getEmail(), passwordDigest, form.getBirthday(), activationDigest, false);
+
         Result<Account> result = accountRepository.save(account);
+
+        // ここからメール送信。本来であれば別クラスに移動すべき
+        // 出来れば非同期にしたい
+        SimpleMailMessage msg = new SimpleMailMessage();
+
+        msg.setFrom("test@localhost.com");
+        msg.setTo("to@localhost.com");
+        msg.setSubject("ユーザー登録");
+
+        // 以下JavaMailSenderでHTMLメールを送るようにすること
+        msg.setText("testtest");
+
+        this.sender.send(msg);
+
         return result.getEntity();
     }
 
