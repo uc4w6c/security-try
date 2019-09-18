@@ -18,14 +18,14 @@ services:
     - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
     - ./db/sql:/docker-entrypoint-initdb.d
     ports:
-    - 3307:3306
+     - "3307:3306"
 
   # postfixadmin
   postfix:
     build: ./mail
     ports:
-    - 25:25
-    - 587:587
+     - "25:25"
+     - "587:587"
     environment:
       TZ: 'Asia/Tokyo'
       # maildomain: 'demo.example.com'
@@ -41,6 +41,6 @@ services:
   maildev:
     image: djfarrelly/maildev:latest
     ports:
-    - 1080:80
-    - 1025:25
+     - "1080:80"
+     - "1025:25"
 
