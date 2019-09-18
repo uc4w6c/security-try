@@ -5,9 +5,11 @@ import com.example.demo.form.UserCreateForm;
 import com.example.demo.form.UserPasswordChangeForm;
 import com.example.demo.repository.AccountRepository;
 import org.seasar.doma.jdbc.Result;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -15,10 +17,12 @@ import java.util.UUID;
 public class AccountService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailSender sender;
 
-    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
+    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder, MailSender sender) {
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
+        this.sender = sender;
     }
 
     /**
@@ -27,6 +31,7 @@ public class AccountService {
      * @param form
      * @return
      */
+    @Transactional // 一旦ここにトランザクション追加
     public Account create(UserCreateForm form) {
         String passwordDigest = passwordEncoder.encode(form.getPassword());
         String activationDigest = UUID.randomUUID().toString();
