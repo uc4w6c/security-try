@@ -18,6 +18,11 @@ spring:
       mail:
         debug: true
 
+  # thymeleaf
+  # これ試しに入れてみる
+  thymeleaf:
+    check-template-location: false
+
 # Spring Security
 security:
   basic:
