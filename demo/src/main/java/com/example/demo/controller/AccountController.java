@@ -50,7 +50,7 @@ public class AccountController {
                                             .templateName("account/createmail")
                                             .build();
         sendMailService.sendMail(mailSender);
-        return "redirect:/account/tempregistration";
+        return "/account/tempregistration";
     }
 
     @GetMapping("account_activation/{activation_digest}")

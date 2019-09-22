@@ -12,8 +12,8 @@ spring:
     # host: localhost
     port: 25
     # port: 587
-    # username: test
-    # password: test
+    username: test
+    password: test
     properties:
       mail:
         debug: true
