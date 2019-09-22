@@ -2,6 +2,7 @@ package com.example.demo.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.thymeleaf.context.Context;
 
@@ -11,9 +12,10 @@ import java.util.List;
  * mail送信時の各種設定クラス
  */
 @AllArgsConstructor(access= AccessLevel.PRIVATE)
+@Getter
 public class MailSender {
     private final String toEmail;
-    private final String message;
+    private final String subject;
     private final Context context;
     private final String templateName;
 
@@ -28,41 +30,41 @@ public class MailSender {
     */
 
     @NoArgsConstructor
-    static class Builder {
+    public static class Builder {
         private String toEmail;
-        private String message;
+        private String subject;
         private Context context = new Context();
         private String templateName;
 
-        Builder toEmail(String toEmail) {
+        public Builder toEmail(String toEmail) {
             this.toEmail = toEmail;
             return this;
         }
 
-        Builder message(String message) {
-            this.message = message;
+        public Builder subject(String subject) {
+            this.subject = subject;
             return this;
         }
 
-        Builder templateName(String templateName) {
+        public Builder templateName(String templateName) {
             this.templateName = templateName;
             return this;
         }
 
-        Builder context(final String name, final Object value) {
+        public Builder context(final String name, final Object value) {
             this.context.setVariable(name, value);
             return this;
         }
 
-        MailSender build() {
+        public MailSender build() {
             if (toEmail == null
-                || message == null
+                || subject == null
                 || templateName == null
                 || context.getVariableNames().size() == 0) {
 
                 throw new NullPointerException();
             }
-            return new MailSender(toEmail, message, context, templateName);
+            return new MailSender(toEmail, subject, context, templateName);
         }
 
     }

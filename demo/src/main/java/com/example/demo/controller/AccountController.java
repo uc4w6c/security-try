@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Account;
 import com.example.demo.domain.AccountUserDetails;
+import com.example.demo.domain.MailSender;
 import com.example.demo.form.UserCreateForm;
 import com.example.demo.form.UserPasswordChangeForm;
 import com.example.demo.service.AccountService;
@@ -14,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.context.Context;
 
 @RequestMapping("/")
 @Controller
@@ -28,38 +28,34 @@ public class AccountController {
         this.sendMailService = sendMailService;
     }
 
-    /*
-    @ModelAttribute
-    public UserCreateForm setupForm() {
-        return new UserCreateForm();
-    }
-    */
-
     @GetMapping("signup")
-    public String create(@ModelAttribute("userCreateForm") UserCreateForm userCreateForm /*, Model model*/) {
-        // model.addAttribute("userCreateForm", new UserCreateForm());
+    public String create(@ModelAttribute("userCreateForm") UserCreateForm userCreateForm) {
         return "account/create";
     }
 
     @PostMapping("signup")
     public String create(@ModelAttribute("userCreateForm") @Validated UserCreateForm userCreateForm,
-                             BindingResult result/*,
-                             RedirectAttributes redirectAttributes,
-                             Model model*/) {
+                             BindingResult result) {
         if (result.hasErrors()) {
-            // redirectAttributes.addFlashAttribute("form", form);
-            // return "redirect:/signup";
-
-            // model.addAttribute("userCreateForm", form);
-            // return "account/create";
             return create(userCreateForm);
         }
-        // model.addAttribute("user", userService.create(form));
+
         Account account = accountService.create(userCreateForm);
+        String url = "/account_activation/" + account.getActivationDigest();
+        MailSender mailSender = new MailSender.Builder()
+                                            // .toEmail(account.getEmail())
+                                            .toEmail("to@localhost.com")
+                                            .subject("メールアドレス確認")
+                                            .context("url", url)
+                                            .templateName("account/createmail")
+                                            .build();
+        sendMailService.sendMail(mailSender);
+        return "redirect:/account/tempregistration";
+    }
 
-        Context context = new Context();
+    @GetMapping("account_activation/{activation_digest}")
+    public String accountActivation(@PathVariable("activation_digest") String activationDigest) {
 
-        sendMailService.sendMail();
         return "redirect:/top";
     }
 

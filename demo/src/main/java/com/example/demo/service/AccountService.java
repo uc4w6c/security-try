@@ -17,12 +17,10 @@ import java.util.UUID;
 public class AccountService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
-    private final MailSender sender;
 
-    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder, MailSender sender) {
+    public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
         this.passwordEncoder = passwordEncoder;
-        this.sender = sender;
     }
 
     /**
@@ -38,19 +36,6 @@ public class AccountService {
         Account account = new Account(form.getEmail(), passwordDigest, form.getBirthday(), activationDigest, false);
 
         Result<Account> result = accountRepository.save(account);
-
-        // ここからメール送信。本来であれば別クラスに移動すべき
-        // 出来れば非同期にしたい
-        SimpleMailMessage msg = new SimpleMailMessage();
-
-        msg.setFrom("test@localhost.com");
-        msg.setTo("to@localhost.com");
-        msg.setSubject("ユーザー登録");
-
-        // 以下JavaMailSenderでHTMLメールを送るようにすること
-        msg.setText("testtest");
-
-        this.sender.send(msg);
 
         return result.getEntity();
     }
