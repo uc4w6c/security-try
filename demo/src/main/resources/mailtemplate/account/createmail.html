@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<h2 th:inline="text">[[${email}]]様</h2>
-<p>商品の一覧です。ご確認ください。</p>
+<p>この度は登録いただきましてありがとうございます。</p>
+
+<p>現在はこのアドレスは仮登録中です。<br>
+    以下のURLに接続して、本登録をおこなってください。</p>
+<a href="/user/profile" th:href="@{/user/profile(id=${'ab123'})}"></a>
 
 </body>
 </html>

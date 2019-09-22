@@ -6,6 +6,7 @@ import com.example.demo.form.UserCreateForm;
 import com.example.demo.form.UserPasswordChangeForm;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.AccountUserDetailService;
+import com.example.demo.service.SendMailService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +14,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.context.Context;
 
 @RequestMapping("/")
 @Controller
 public class AccountController {
 
     private final AccountService accountService;
+    private final SendMailService sendMailService;
 
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, SendMailService sendMailService) {
         this.accountService = accountService;
+        this.sendMailService = sendMailService;
     }
 
     /*
@@ -38,7 +42,7 @@ public class AccountController {
     }
 
     @PostMapping("signup")
-        public String create(@ModelAttribute("userCreateForm") @Validated UserCreateForm userCreateForm,
+    public String create(@ModelAttribute("userCreateForm") @Validated UserCreateForm userCreateForm,
                              BindingResult result/*,
                              RedirectAttributes redirectAttributes,
                              Model model*/) {
@@ -51,7 +55,11 @@ public class AccountController {
             return create(userCreateForm);
         }
         // model.addAttribute("user", userService.create(form));
-        accountService.create(userCreateForm);
+        Account account = accountService.create(userCreateForm);
+
+        Context context = new Context();
+
+        sendMailService.sendMail();
         return "redirect:/top";
     }
 
