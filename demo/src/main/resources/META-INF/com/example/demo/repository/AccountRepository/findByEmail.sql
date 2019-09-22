@@ -6,4 +6,4 @@ select
 from
     accounts
 where
-    email = /* email */'taro'
+    email = /* email */'foo@foo.com'

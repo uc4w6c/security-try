@@ -24,7 +24,7 @@ public class AccountService {
     }
 
     /**
-     * アカウント作成メソッド
+     * アカウント仮登録メソッド
      * TODO: formに依存しちゃってるから改善したい
      * @param form
      * @return
@@ -38,6 +38,19 @@ public class AccountService {
         Result<Account> result = accountRepository.save(account);
 
         return result.getEntity();
+    }
+
+    /**
+     * アカウント有効化tokenからユーザーを取得
+     * @param activationDigest
+     * @return
+     */
+    public Account accountEnable(String activationDigest) {
+        Account disableAccount = accountRepository.findByActivationDigest(activationDigest);
+        // TODO: ここにデータ存在しない場合の処理を入れること
+
+        accountRepository.enableAccount(disableAccount.getEmail());
+        return disableAccount;
     }
 
     /**

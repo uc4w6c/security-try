@@ -8,13 +8,20 @@ import com.example.demo.form.UserPasswordChangeForm;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.AccountUserDetailService;
 import com.example.demo.service.SendMailService;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Collection;
 
 @RequestMapping("/")
 @Controller
@@ -53,9 +60,22 @@ public class AccountController {
         return "/account/tempregistration";
     }
 
+    /**
+     * ユーザー本登録処理
+     * @param activationDigest
+     * @return
+     */
     @GetMapping("account_activation/{activation_digest}")
     public String accountActivation(@PathVariable("activation_digest") String activationDigest) {
 
+        Account account = accountService.accountEnable(activationDigest);
+
+        // TODO: 以下完成させること
+        // TODO: AccountUserDetailsのauthoritiesを自動設定するように変更すること
+        UserDetails userDetails = new AccountUserDetails(account, AuthorityUtils.createAuthorityList(("ROLE_USER")));
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, (Collection) userDetails.getAuthorities());
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         return "redirect:/top";
     }
 

@@ -5,7 +5,8 @@
 
 <p>現在はこのアドレスは仮登録中です。<br>
     以下のURLに接続して、本登録をおこなってください。</p>
-<a th:href="${url}">[[${url}]]</a>
+<!--/* domain名直接書いてダサいけど、テスト用だからOKとする */-->
+<a th:href="@{'http://localhost:8080' + ${url}}">http://localhost:8080[[${url}]]</a>
 
 </body>
 </html>

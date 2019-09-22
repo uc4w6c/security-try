@@ -14,9 +14,15 @@ public interface AccountRepository {
     @Select
     public Account findByEmail(String email);
 
+    @Select
+    public Account findByActivationDigest(String activationDigest);
+
     @Insert
     public Result<Account> save(Account account);
 
     @Update(sqlFile = true)
     public int passwordChange(String email, String passwordDigest);
+
+    @Update(sqlFile = true)
+    public int enableAccount(String email);
 }

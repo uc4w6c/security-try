@@ -19,16 +19,6 @@ public class MailSender {
     private final Context context;
     private final String templateName;
 
-    /*
-    lombok使うから消す
-    public MailSender(String toEmail, String message, Context context, String templateName) {
-        this.toEmail = toEmail;
-        this.message = message;
-        this.context = context;
-        this.templateName = templateName;
-    }
-    */
-
     @NoArgsConstructor
     public static class Builder {
         private String toEmail;

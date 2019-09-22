@@ -1,6 +1,6 @@
 update
     accounts
 set
-    password_digest = /* passwordDigest */'password'
+    enabled = true
 where
     email = /* email */'foo@foo.com'
