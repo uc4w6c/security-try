@@ -3,8 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.domain.Account;
 import com.example.demo.domain.AccountUserDetails;
 import com.example.demo.domain.MailSender;
+import com.example.demo.domain.PasswordReissueInfo;
 import com.example.demo.form.UserCreateForm;
 import com.example.demo.form.UserPasswordChangeForm;
+import com.example.demo.form.UserPasswordReissueForm;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.AccountUserDetailService;
 import com.example.demo.service.SendMailService;
@@ -40,6 +42,12 @@ public class AccountController {
         return "account/create";
     }
 
+    /**
+     * ユーザー仮登録処理
+     * @param userCreateForm
+     * @param result
+     * @return
+     */
     @PostMapping("signup")
     public String create(@ModelAttribute("userCreateForm") @Validated UserCreateForm userCreateForm,
                              BindingResult result) {
@@ -48,6 +56,7 @@ public class AccountController {
         }
 
         Account account = accountService.create(userCreateForm);
+
         String url = "/account_activation/" + account.getActivationDigest();
         MailSender mailSender = new MailSender.Builder()
                                             .toEmail(account.getEmail())
@@ -57,6 +66,26 @@ public class AccountController {
                                             .build();
         sendMailService.sendMail(mailSender);
         return "/account/tempregistration";
+    }
+
+    @GetMapping("reissue/create")
+    public String reissueCreate(@ModelAttribute("userPasswordReissueForm") UserPasswordReissueForm userPasswordReissueForm) {
+        return "account/reissuecreate";
+    }
+
+    @PostMapping("reissue/create")
+    public String reissueCreate(@ModelAttribute("userPasswordReissueForm") UserPasswordReissueForm userPasswordReissueForm,
+                                    BindingResult result) {
+
+        if (result.hasErrors()) {
+            return reissueCreate(userPasswordReissueForm);
+        }
+
+        PasswordReissueInfo passwordReissueInfo = accountService.reissueCreate(
+                                                            userPasswordReissueForm.getEmail(),
+                                                            userPasswordReissueForm.getBirthday());
+
+        return "account/tempreissue";
     }
 
     /**
