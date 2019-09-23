@@ -8,6 +8,8 @@ import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.Result;
 
+import java.util.Optional;
+
 @ConfigAutowireable
 @Dao
 public interface AccountRepository {
@@ -15,7 +17,7 @@ public interface AccountRepository {
     public Account findByEmail(String email);
 
     @Select
-    public Account findByActivationDigest(String activationDigest);
+    public Optional<Account> findByActivationDigest(String activationDigest);
 
     @Insert
     public Result<Account> save(Account account);

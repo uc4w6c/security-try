@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Account;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.form.UserCreateForm;
 import com.example.demo.form.UserPasswordChangeForm;
 import com.example.demo.repository.AccountRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,6 +28,7 @@ public class AccountService {
     /**
      * アカウント仮登録メソッド
      * TODO: formに依存しちゃってるから改善したい
+     * TODO: トークンの有効期限を設定すべし
      * @param form
      * @return
      */
@@ -46,8 +49,8 @@ public class AccountService {
      * @return
      */
     public Account accountEnable(String activationDigest) {
-        Account disableAccount = accountRepository.findByActivationDigest(activationDigest);
-        // TODO: ここにデータ存在しない場合の処理を入れること
+        Account disableAccount = accountRepository.findByActivationDigest(activationDigest)
+                                                    .orElseThrow(() -> new NotFoundException());
 
         accountRepository.enableAccount(disableAccount.getEmail());
         return disableAccount;

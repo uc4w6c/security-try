@@ -25,6 +25,6 @@ public class AccountUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Account account = Optional.ofNullable(accountRepository.findByEmail(email))
                     .orElseThrow(() -> new UsernameNotFoundException("user not found"));
-        return new AccountUserDetails(account, AuthorityUtils.createAuthorityList(("ROLE_USER")));
+        return new AccountUserDetails(account);
     }
 }

@@ -50,8 +50,7 @@ public class AccountController {
         Account account = accountService.create(userCreateForm);
         String url = "/account_activation/" + account.getActivationDigest();
         MailSender mailSender = new MailSender.Builder()
-                                            // .toEmail(account.getEmail())
-                                            .toEmail("to@localhost.com")
+                                            .toEmail(account.getEmail())
                                             .subject("メールアドレス確認")
                                             .context("url", url)
                                             .templateName("account/createmail")
