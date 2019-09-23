@@ -70,9 +70,10 @@ public class AccountController {
 
         Account account = accountService.accountEnable(activationDigest);
 
+
         // TODO: 以下完成させること
         // TODO: AccountUserDetailsのauthoritiesを自動設定するように変更すること
-        UserDetails userDetails = new AccountUserDetails(account, AuthorityUtils.createAuthorityList(("ROLE_USER")));
+        UserDetails userDetails = new AccountUserDetails(account);
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, (Collection) userDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

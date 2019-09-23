@@ -1,6 +1,7 @@
 package com.example.demo.domain;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -9,10 +10,9 @@ public class AccountUserDetails implements UserDetails {
     private final Account account;
     private final Collection<GrantedAuthority> authorities;
 
-    public AccountUserDetails(
-            Account account, Collection<GrantedAuthority> authorities) {
+    public AccountUserDetails(Account account) {
         this.account = account;
-        this.authorities = authorities;
+        this.authorities = AuthorityUtils.createAuthorityList(("ROLE_USER"));
     }
 
     public String getPassword() {
@@ -22,8 +22,7 @@ public class AccountUserDetails implements UserDetails {
         return account.getEmail();
     }
     public boolean isEnabled() {
-        return true;
-        // return account.isEnabled();
+        return account.isEnabled();
     }
 
     public Collection<GrantedAuthority> getAuthorities() {
