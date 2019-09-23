@@ -8,6 +8,7 @@ import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.Result;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public interface AccountRepository {
     public Optional<Account> findByActivationDigest(String activationDigest);
 
     @Select
-    public Optional<Account> findByEmailAndBirthday(String email, Date birthday);
+    public Optional<Account> findByEmailAndBirthday(String email, LocalDate birthday);
 
     @Insert
     public Result<Account> save(Account account);

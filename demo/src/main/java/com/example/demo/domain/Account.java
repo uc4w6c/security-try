@@ -9,6 +9,7 @@ import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.jdbc.entity.NamingType;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -20,7 +21,7 @@ public class Account {
     @Id
     private final String email;
     private final String passwordDigest;
-    private final Date birthday;
+    private final LocalDate birthday;
     private final String activationDigest;
     private final boolean enabled;
 }

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<p>パスワード再発行申請がありました。</p>
+
+<p>以下のURLに接続して、パスワードの再発行をおこなってください。</p>
+<!--/* domain名直接書いてダサいけど、テスト用だからOKとする */-->
+<a th:href="@{'http://localhost:8080' + ${url}}">http://localhost:8080[[${url}]]</a>
+
+</body>
+</html>

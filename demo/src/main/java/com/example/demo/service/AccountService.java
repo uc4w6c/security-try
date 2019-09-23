@@ -63,30 +63,6 @@ public class AccountService {
         return disableAccount;
     }
 
-
-    public PasswordReissueInfo reissueCreate(String email, Date birthday) {
-        // TODO: NotFoundから別のものに変更すること
-        Account account = accountRepository.findByEmailAndBirthday(email, birthday)
-                                            .orElseThrow(() -> new NotFoundException());
-
-        String token = UUID.randomUUID().toString();
-        // MEMO: 一旦決め打ちで現在時刻から15分間有効
-        LocalDateTime expiryDate = LocalDateTime.now().plusMinutes(15);
-
-        Optional<PasswordReissueInfo> passwordReissueInfo = passwordReissueInfoRepository.findByEmail(email);
-        Result<PasswordReissueInfo> newPasswordReissueInfo = passwordReissueInfo
-                                                        .map(info -> {
-                                                            return passwordReissueInfoRepository.update(
-                                                                                info.tokenUpdate(token, expiryDate));
-                                                        })
-                                                        .orElseGet(() -> {
-                                                            return passwordReissueInfoRepository.insert(
-                                                                    new PasswordReissueInfo(email, token, expiryDate));
-                                                        });
-
-        return newPasswordReissueInfo.getEntity();
-    }
-
     /**
      * パスワード変更メソッド
      * @param email

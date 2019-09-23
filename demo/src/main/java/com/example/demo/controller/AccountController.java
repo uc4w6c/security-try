@@ -23,7 +23,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 
 @RequestMapping("/")
 @Controller
@@ -54,6 +56,10 @@ public class AccountController {
         if (result.hasErrors()) {
             return create(userCreateForm);
         }
+        // 誕生日が設定されていない場合は2019/1/1をセットする
+        if (userCreateForm.getBirthday() == null) {
+            userCreateForm.setBirthday(LocalDate.of( 2019, 1, 1 ));
+        }
 
         Account account = accountService.create(userCreateForm);
 
@@ -66,26 +72,6 @@ public class AccountController {
                                             .build();
         sendMailService.sendMail(mailSender);
         return "/account/tempregistration";
-    }
-
-    @GetMapping("reissue/create")
-    public String reissueCreate(@ModelAttribute("userPasswordReissueForm") UserPasswordReissueForm userPasswordReissueForm) {
-        return "account/reissuecreate";
-    }
-
-    @PostMapping("reissue/create")
-    public String reissueCreate(@ModelAttribute("userPasswordReissueForm") UserPasswordReissueForm userPasswordReissueForm,
-                                    BindingResult result) {
-
-        if (result.hasErrors()) {
-            return reissueCreate(userPasswordReissueForm);
-        }
-
-        PasswordReissueInfo passwordReissueInfo = accountService.reissueCreate(
-                                                            userPasswordReissueForm.getEmail(),
-                                                            userPasswordReissueForm.getBirthday());
-
-        return "account/tempreissue";
     }
 
     /**

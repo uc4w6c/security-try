@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/account_activation/**").permitAll()
                 .antMatchers("/reissue/create").permitAll()
+                .antMatchers("/reissue/resetpassword/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

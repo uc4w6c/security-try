@@ -9,6 +9,7 @@ import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.Result;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -17,6 +18,9 @@ import java.util.Optional;
 public interface PasswordReissueInfoRepository {
     @Select
     public Optional<PasswordReissueInfo> findByEmail(String email);
+
+    @Select
+    public Optional<PasswordReissueInfo> findByToken(String token, LocalDateTime nowTime);
 
     @Update
     public Result<PasswordReissueInfo> update(PasswordReissueInfo passwordReissueInfo);

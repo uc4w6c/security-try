@@ -8,9 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDate;
 
-@Setter
 @Getter
 @AllArgsConstructor
 @ToString(exclude={"password", "passwordConfirmation"})
@@ -26,7 +25,8 @@ public class UserCreateForm {
     @NotEmpty
     @Size(min = 5, max = 50)
     private final String passwordConfirmation;
-    @NotNull(message = "{dateFrom.notnull}")
+    // @NotNull(message = "{dateFrom.notnull}")
+    @Setter
     @DateTimeFormat(pattern="yyyy/MM/dd")
-    private final Date birthday;
+    private LocalDate birthday;
 }

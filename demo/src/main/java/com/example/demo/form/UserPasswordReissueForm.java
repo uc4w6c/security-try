@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -20,7 +21,7 @@ public class UserPasswordReissueForm {
     private final String email;
     @NotNull(message = "{dateFrom.notnull}")
     @DateTimeFormat(pattern="yyyy/MM/dd")
-    private final Date birthday;
+    private final LocalDate birthday;
     @NotEmpty
     @Size(min = 1, max = 50)
     @Email // RFC2822準拠 これよりもゆるい場合は個別実装の必要あり。

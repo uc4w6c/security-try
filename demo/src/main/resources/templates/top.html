@@ -5,9 +5,10 @@
     <meta charset="utf-8" />
 </head>
 <body>
-<h1>success</h1>
+<!-- <div class="alert alert-success" role="alert">${msg}</div> -->
+<h1>ログインしました</h1>
 <p>
-    <p>ok!!</p>
+    <p th:text="${email} + 'さん ようこそ!!'"></p>
 </p>
 </body>
 </html>
