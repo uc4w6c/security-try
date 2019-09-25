@@ -22,7 +22,7 @@ create table testdb.login_failure_manager
 (
  email                  varchar(50) not null
  , failure_count        tinyint not null default 0
- , lock_count           tinyint not null default 0
+ , tmp_lock_count           tinyint not null default 0
  , last_fail_datetime   datetime
  ,   primary key (email)
  ,   foreign key fk_email (email) references accounts(email)
