@@ -31,7 +31,6 @@ public class AccountReissueService {
 
     /**
      * パスワード再発行申請処理
-     * MEMO: 責務多すぎるような気もする。別サービスに移動する？
      * @param email
      * @param birthday
      * @return PasswordReissueInfo
