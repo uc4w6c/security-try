@@ -3,6 +3,7 @@ package com.example.demo.form;
 import com.example.demo.validation.annotation.EqualsPropertyValues;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
@@ -14,6 +15,7 @@ import java.util.Date;
 
 @Getter
 @AllArgsConstructor
+@ToString
 public class UserPasswordReissueForm {
     @NotEmpty
     @Size(min = 1, max = 50)
