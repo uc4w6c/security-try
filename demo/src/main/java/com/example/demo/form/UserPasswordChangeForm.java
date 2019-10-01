@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Getter
-@ToString
+@ToString(exclude={"password", "passwordConfirmation"})
 @AllArgsConstructor
 @EqualsPropertyValues(property = "password", comparingProperty = "passwordConfirmation")
 public class UserPasswordChangeForm {

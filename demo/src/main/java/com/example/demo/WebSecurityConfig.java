@@ -51,6 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login")
                 .defaultSuccessUrl("/top", true)
                 .permitAll();
+        // securityテストを行うためにcsrfを無効化
+        http.csrf().disable();
     }
 
     @Override
