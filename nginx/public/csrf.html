@@ -1,0 +1,10 @@
+<body>
+  <p>csrf iframe</p>
+  <form action="http://localhost:8080/account/detail">
+  </form>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+      document.forms[0].submit();
+    });
+  </script>
+</body>
