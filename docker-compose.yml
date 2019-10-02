@@ -44,3 +44,10 @@ services:
      - "1080:80"
      - "1025:25"
 
+  # nginx
+  nginx:
+    build: ./nginx
+    ports:
+     - "1081:80"
+    volumes:
+      - ./nginx/public:/var/www/html
