@@ -44,6 +44,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/reissue/resetpassword/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+            // csrfのテストのためにX-Frame-Optionsを許可する
+            .headers()
+                .frameOptions().disable()
+                .and()
             .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")

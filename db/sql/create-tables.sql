@@ -28,3 +28,12 @@ create table testdb.login_failure_manager
  ,   foreign key fk_email (email) references accounts(email)
 );
 
+create table testdb.posts
+(
+ id                     int auto_increment not null
+ , email                varchar(50) not null
+ , body                 varchar(200) not null
+ , crated_at            datetime
+ ,  primay key (id)
+ ,  foreign key fk_email (email) references accounts(email)
+);
