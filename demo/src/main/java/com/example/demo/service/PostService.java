@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Account;
+import com.example.demo.domain.Post;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.form.UserCreateForm;
 import com.example.demo.repository.AccountRepository;
@@ -23,7 +24,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Optional<List<Account>> find(String email) {
+    public List<Post> findAll() {
         return postRepository.findAll();
     }
 }
