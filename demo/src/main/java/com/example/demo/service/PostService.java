@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,7 +32,7 @@ public class PostService {
 
     public Post save(String email, String body) {
 
-        Post post = new Post(email, body, aa)
-        return postRepository.save();
+        Post post = new Post(-1, email, body, LocalDate.now());
+        return postRepository.save(post).getEntity();
     }
 }

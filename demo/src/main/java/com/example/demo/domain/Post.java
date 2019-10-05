@@ -2,9 +2,7 @@ package com.example.demo.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.seasar.doma.Entity;
-import org.seasar.doma.Id;
-import org.seasar.doma.Table;
+import org.seasar.doma.*;
 import org.seasar.doma.jdbc.entity.NamingType;
 
 import java.time.LocalDate;
@@ -15,6 +13,7 @@ import java.time.LocalDate;
 @Table(name = "posts")
 public class Post {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final int id;
     private final String email;
     private final String body;

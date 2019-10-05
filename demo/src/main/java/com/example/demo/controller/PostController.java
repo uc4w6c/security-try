@@ -5,6 +5,7 @@ import com.example.demo.domain.Post;
 import com.example.demo.form.PostCreateForm;
 import com.example.demo.form.UserCreateForm;
 import com.example.demo.service.PostService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,13 +38,13 @@ public class PostController {
 
     @PostMapping("/")
     public String create(@ModelAttribute("form") @Validated PostCreateForm postCreateForm,
+                         @AuthenticationPrincipal AccountUserDetails accountUserDetails,
                          BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            model.addAttribute("posts", posts);
             return index(model);
         }
-        postService.save();
+        postService.save(accountUserDetails.getUsername(), postCreateForm.getBody());
 
         return index(model);
     }
