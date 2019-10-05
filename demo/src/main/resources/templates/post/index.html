@@ -32,12 +32,15 @@
             </thead>
             <tbody>
                 <tr th:each="post : ${posts}">
-                    <td th:text="${post.email}"></td>
-                    <td th:text="${post.body}"></td>
-                    <td th:text="${post.cratedAt}"></td>
+                    <td th:utext="${post.email}"></td>
+                    <td th:utext="${post.body}"></td>
+                    <td th:utext="${post.cratedAt}"></td>
                 </tr>
             </tbody>
         </table>
+        <form th:method="post" th:action="@{'/post/'}">
+
+        </form>
     </div>
 </div>
 </body>
