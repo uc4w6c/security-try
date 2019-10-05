@@ -28,3 +28,14 @@ https://terasolunaorg.github.io/guideline/5.1.0.RELEASE/ja/Security/SecureLoginD
 
 メール設定
 https://tech-lab.sios.jp/archives/11176
+
+
+DOMA使い方
+・/*# orderBy */ みたいな構文であれば、動的に作成可能。が、 シングルクォートは利用不可
+　SQLインジェクションができないように
+・JdbcTemplateを利用すれば、動的にシングルクォートを利用可能
+
+SQLインジェクションの検索条件
+%' UNION SELECT null, email, password_digest, null from accounts where email like '%
+を検索ボックスに入力する
+

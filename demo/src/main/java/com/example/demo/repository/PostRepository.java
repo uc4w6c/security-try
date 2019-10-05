@@ -17,6 +17,9 @@ public interface PostRepository {
     @Select
     public List<Post> findAll();
 
+    @Select
+    public List<Post> findByBody(String queryBody);
+
     @Insert
     public Result<Post> save(Post post);
 }

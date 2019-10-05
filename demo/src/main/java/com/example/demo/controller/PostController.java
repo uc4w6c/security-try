@@ -4,6 +4,7 @@ import com.example.demo.domain.AccountUserDetails;
 import com.example.demo.domain.Post;
 import com.example.demo.form.PostCreateForm;
 import com.example.demo.form.UserCreateForm;
+import com.example.demo.form.UserPasswordChangeForm;
 import com.example.demo.service.PostService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +30,14 @@ public class PostController {
     @GetMapping("/")
     public String index(Model model) {
         List<Post> posts = postService.findAll();
+        model.addAttribute("posts", posts);
+        return "post/index";
+    }
+
+    @GetMapping("search/")
+    public String find(@RequestParam("query") String query,
+                       Model model) {
+        List<Post> posts = postService.findByBody(query);
         model.addAttribute("posts", posts);
         return "post/index";
     }
