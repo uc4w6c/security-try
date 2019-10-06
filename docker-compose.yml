@@ -51,3 +51,10 @@ services:
      - "1081:80"
     volumes:
       - ./nginx/public:/var/www/html
+  # ap
+  ap:
+    build: ./demo
+    depends_on:
+      - postfix
+    ports:
+      - "8081:8080"
