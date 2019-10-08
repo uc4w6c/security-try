@@ -33,6 +33,7 @@ create table testdb.posts
  id                     int auto_increment not null PRIMARY KEY
  , email                varchar(50) not null
  , body                 varchar(200) not null
- , created_at            datetime
+ , deleted_at           datetime
+ , created_at           datetime
  ,  foreign key fk_email (email) references accounts(email)
 );

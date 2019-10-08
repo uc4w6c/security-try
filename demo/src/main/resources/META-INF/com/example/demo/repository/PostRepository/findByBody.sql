@@ -6,4 +6,5 @@ select
 from
     posts
 where
-    body like /*# queryBody */
+    deleted_at is null
+    and body like /*# queryBody */

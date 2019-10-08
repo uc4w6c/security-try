@@ -5,3 +5,6 @@ select
     , created_at
 from
     posts
+where
+    deleted_at is null;
+

@@ -36,7 +36,9 @@ public class PostService {
         StringBuilder sql = new StringBuilder();
         sql.append("select id, email, body, created_at ");
         sql.append("from posts ");
-        sql.append("where body like '%").append(queryBody).append("%'");
+        sql.append("where ");
+        sql.append("deleted_at is null ");
+        sql.append("and body like '%").append(queryBody).append("%'");
 
         // SQLインジェクションのテスト
         List<Post> posts = new ArrayList<>();
@@ -44,7 +46,8 @@ public class PostService {
             new BeanPropertyRowMapper<Post>(Post.class))
                 .stream().forEach(n -> {
                     Post post = new Post(n.getId(), n.getEmail(),
-                                         n.getBody(), n.getCreatedAt());
+                                         n.getBody(), n.getDeletedAt(),
+                                         n.getCreatedAt());
                     posts.add(post);
                 });
 
@@ -56,7 +59,7 @@ public class PostService {
 
     public Post save(String email, String body) {
 
-        Post post = new Post(-1, email, body, LocalDate.now());
+        Post post = new Post(-1, email, body, null, LocalDate.now());
         return postRepository.save(post).getEntity();
     }
 }

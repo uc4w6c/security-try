@@ -24,5 +24,6 @@ public class Post {
     private int id;
     private String email;
     private String body;
+    private LocalDate deletedAt;
     private LocalDate createdAt;
 }
