@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'com.google.protobuf'  version '0.8.9' // grpc
 }
 
 group = 'com.example'
@@ -44,6 +45,40 @@ idea {
 	}
 }
 
+// gRPCのprotoファイル配置ディレクトリ
+sourceSets {
+	main {
+		java {
+			srcDirs 'src/main/grpc'
+		}
+	}
+}
+
+// gRPCの設定
+def grpcVersion = '1.10.0'
+
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:3.5.1-1'
+	}
+
+	plugins {
+		grpc {
+			artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+		}
+	}
+
+	generateProtoTasks {
+		all().each { task ->
+			task.plugins {
+				grpc
+			}
+		}
+	}
+
+	generatedFilesBaseDir = "$projectDir/src/"
+}
+
 configurations {
 	developmentOnly
 	runtimeClasspath {
@@ -69,6 +104,7 @@ dependencies {
 	compile('org.webjars:jquery-ui:1.12.1')
 	compile('org.webjars:bootstrap:4.0.0')
 	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('io.github.lognet:grpc-spring-boot-starter:3.3.0') // grpc
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'

@@ -1,0 +1,15 @@
+// 一旦仮でここにprotoファイルを置いている。(本来はサーバ側 or それようにリポジトリあった方がよさそう)
+syntax = "proto3";
+option java_package = "com.example.demo.proto";
+
+service Greeter {
+    rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloReply {
+    string message = 1;
+}
