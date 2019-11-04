@@ -39,3 +39,8 @@ SQLインジェクションの検索条件
 %' UNION SELECT null, email, password_digest, null from accounts where email like '%
 を検索ボックスに入力する
 
+・gRPCもここでやってしまった
+参考URL
+https://blog.takehata-engineer.com/entry/server-side-kotlin-grpc-project-creation-to-start-confirmation
+https://qiita.com/disc99/items/3fdfe5c1c1170871221a
+https://qiita.com/hosopy/items/f11f392dc37de824a836
