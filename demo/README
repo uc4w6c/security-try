@@ -44,3 +44,11 @@ SQLインジェクションの検索条件
 https://blog.takehata-engineer.com/entry/server-side-kotlin-grpc-project-creation-to-start-confirmation
 https://qiita.com/disc99/items/3fdfe5c1c1170871221a
 https://qiita.com/hosopy/items/f11f392dc37de824a836
+
+・gRPCをコンソールから実行
+// これをグローバルインストール
+npm install -g grpcc
+// ルートディレクトリで(demo)以下実行
+grpcc --proto ./src/main/proto/Greeter.proto --address 127.0.0.1:6565 -i
+// 対話モードで以下コマンドを実行
+Greeter@127.0.0.1:6565> client.sayHello({name:"takehata"}, printReply)
